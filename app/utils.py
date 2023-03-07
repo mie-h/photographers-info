@@ -1,4 +1,4 @@
-from app.read_json import photographers_data
+from app.read_json import PHOTOGRAPHERS_DATA
 import json
 
 
@@ -28,15 +28,22 @@ def get_photographer_dict(photographer):
     return photographer_dict
 
 
+def _get_all_photographers():
+    data = []
+    for photographer in PHOTOGRAPHERS_DATA:
+        data.append(get_photographer_dict(photographer))
+    return data
+
+
 def find_photographer(id):
-    for i, photographer in enumerate(photographers_data):
+    for i, photographer in enumerate(PHOTOGRAPHERS_DATA):
         if photographer['id'] == id:
             return get_photographer_dict(photographer) 
         
 
 def _get_photographers_by_event_type_helper(event_type):
     data = []
-    for photographer in photographers_data:
+    for photographer in PHOTOGRAPHERS_DATA:
         if event_type in photographer['event_type']['type']:
             data.append(get_photographer_dict(photographer))
     return data
