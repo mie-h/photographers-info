@@ -1,14 +1,14 @@
 
 
-from app.read_json import photographers_data
+from app.read_json import PHOTOGRAPHERS_DATA
 from app.utils import _get_photographers_by_event_type_helper
 import requests
 import pytest
 import ast
 
 
-# base_url = "http://127.0.0.1:8000"
-base_url = "http://0.0.0.0:80"
+base_url = "http://127.0.0.1:8000"
+# base_url = "http://0.0.0.0:80"
 
 
 def test_get_api_root():
@@ -24,10 +24,10 @@ def test_get_all_photographers():
 
     data = response.json()
     lst = ast.literal_eval(data['body'])
-    assert len(lst) == len(photographers_data)
+    assert len(lst) == len(PHOTOGRAPHERS_DATA)
 
 
-@pytest.mark.parametrize(("id", "photographer"), [(photographer["id"], photographer) for photographer in photographers_data])
+@pytest.mark.parametrize(("id", "photographer"), [(photographer["id"], photographer) for photographer in PHOTOGRAPHERS_DATA])
 def test_get_photographer_by_id(id, photographer):
     print(id, photographer)
     url = base_url + f"/api/photographers/{id}"

@@ -1,4 +1,3 @@
-from app.read_json import photographers_data
 import app.utils as utils 
 from fastapi import FastAPI, HTTPException
 
@@ -29,4 +28,4 @@ def get_photographer_by_id(photographerID: int):
 @app.get("/api/photographers/event/{eventType}")
 def get_photographers_by_event_type(eventType: str):
     data = utils._get_photographers_by_event_type_helper(eventType)
-    return utils.uild_response(200, data)
+    return utils.build_response(200, data)
