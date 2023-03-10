@@ -1,5 +1,3 @@
-
-
 from app.read_json import PHOTOGRAPHERS_DATA
 from app.utils import _get_photographers_by_event_type_helper
 import requests
@@ -7,8 +5,9 @@ import pytest
 import ast
 
 
-base_url = "http://127.0.0.1:8000"
+# base_url = "http://127.0.0.1:8000"
 # base_url = "http://0.0.0.0:80"
+base_url = "http://54.219.41.155:80"
 
 
 def test_get_api_root():

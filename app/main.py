@@ -1,5 +1,6 @@
 import app.utils as utils 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
+from app.models import Photographer
 
 
 app = FastAPI()
@@ -13,19 +14,29 @@ def get_api_root():
 
 @app.get("/api/photographers")
 def get_all_photographers():
-    data = utils._get_all_photographers()
-    return utils.build_response(200, data)
+    return utils.get_all_photographers()
 
 
 @app.get("/api/photographers/{photographerID}")
 def get_photographer_by_id(photographerID: int):
-    photographer_dict = utils.find_photographer(photographerID)
-    if photographer_dict is None:
-        raise HTTPException(status=404, detail=f"Photographer with id: {photographerID} not found")
-    return utils.build_response(200, photographer_dict)
+    return utils.get_photographer_by_id(photographerID)
 
 
-@app.get("/api/photographers/event/{eventType}")
+@app.get("/api/photographers/events/{eventType}")
 def get_photographers_by_event_type(eventType: str):
-    data = utils._get_photographers_by_event_type_helper(eventType)
-    return utils.build_response(200, data)
+    return utils.get_photographers_by_event_type(eventType)
+
+
+@app.post("/api/photographers")
+def save_photographer(photographer: Photographer):
+    return utils.save_photographer(photographer)
+
+
+@app.patch("/api/photographers")
+def update_photographer(id: int, key: str, value: str, value_type: str):
+    return utils.update_photographer(id, key, value, value_type)
+
+
+@app.delete("/api/photographers")
+def delete_photographer(id: int):
+    return utils.delete_photographer(id)
